@@ -8,12 +8,12 @@ import WriteToDB from "./write_to_db";
  * @param {ModelSchema<T>} definition - An object defining schema fields, unique constraints, required fields, and collection name.
  * @returns {ModelClass<T>} - A class representing the schema model with CRUD methods.
  */
-function Schema<T>(definition: ModelSchema<T>): ModelClass<T> {
+function Schema<T>(definition: ModelSchema<T>) {
   class Model {
     private data: Partial<Data<T>>;
     public static writeTodbInstance: WriteToDB;
 
-    constructor(data: Partial<Data<T>>) {
+    constructor(data: Partial<T>) {
       this.data = data;
 
       if (definition.required) {

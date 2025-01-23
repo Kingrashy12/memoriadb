@@ -4,7 +4,8 @@ type SchemaType =
   | BooleanConstructor
   | ArrayConstructor
   | never[]
-  | string;
+  | string
+  | number;
 
 export type ModelSchema<T extends Record<string, any>> = {
   /**

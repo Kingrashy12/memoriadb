@@ -1,9 +1,18 @@
 {
   "name": "memoriadb",
   "version": "1.0.0",
-  "description": "A high-performance in-memory database designed for rapid data storage and retrieval.",
-  "main": "dist/index.cjs",
+  "description": "A lightweight, in-memory database library for Node.js, designed for simplicity and ease of use.",
   "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "scripts": {
     "build": "rollup -c"
   },
@@ -20,6 +29,11 @@
     "database",
     "database",
     "data"
+  ],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
   ],
   "author": "Rapheal Chizitere",
   "license": "MIT",

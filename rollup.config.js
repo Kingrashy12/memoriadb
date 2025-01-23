@@ -31,5 +31,5 @@ export default {
     esbuild({ minify: true }),
     visualizer({ open: true }),
   ],
-  external: [],
+  external: ["path", "fs"],
 };
