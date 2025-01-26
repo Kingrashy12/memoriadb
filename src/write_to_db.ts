@@ -71,7 +71,7 @@ class WriteToDB {
       id: genId(),
       ...data,
       created_at: Date.now(),
-      update_at: Date.now(),
+      updated_at: Date.now(),
     };
 
     currentData.push(dataObj); // Add new data to the array
@@ -108,7 +108,7 @@ class WriteToDB {
       if (index !== -1) {
         currentData[index] = {
           ...currentData[index],
-          update_at: Date.now(),
+          updated_at: Date.now(),
           ...updateData,
         };
         writeFileSync(this.dir, JSON.stringify(currentData, null, 2));
