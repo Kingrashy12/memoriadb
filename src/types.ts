@@ -67,11 +67,11 @@ export interface ModelInterface<T extends Record<string, any>> {
 
 export type ModelClass<T> = {
   new (data: Partial<T>): T;
-  find(): Promise<any[]>;
-  findById(id: string): Promise<any>;
-  findOne(params: { field: string; value: string }): Promise<any>;
-  updateById(id: string, updateData: Partial<T>): Promise<any>;
-  deleteById(id: string): Promise<any>;
+  find(): Promise<T[]>;
+  findById(id: string): Promise<T>;
+  findOne(params: { field: keyof T; value: string }): Promise<T>;
+  updateById(id: string, updateData: Partial<T>): Promise<T>;
+  deleteById(id: string): Promise<T>;
 };
 
 export type Data<T> = {

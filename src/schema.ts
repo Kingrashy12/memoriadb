@@ -123,18 +123,18 @@ function Schema<T extends Record<string, any>>(definition: ModelSchema<T>) {
       field,
       value,
     }: {
-      field: string;
+      field: keyof T;
       value: string;
-    }): Promise<any> {
+    }): Promise<T> {
       return this.getWriteToDB().findOne({ field, value });
     }
 
-    static async updateById(id: string, updateData: Partial<T>): Promise<any> {
+    static async updateById(id: string, updateData: Partial<T>): Promise<T> {
       this.getCheckInputFields(updateData);
       return this.getWriteToDB().update(id, updateData);
     }
 
-    static async deleteById(id: string): Promise<any> {
+    static async deleteById(id: string): Promise<T> {
       return this.getWriteToDB().delete(id);
     }
   }

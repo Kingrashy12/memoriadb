@@ -10,9 +10,9 @@ const genId = () => {
   return id;
 };
 
-type Where = {
-  field: string; // Field to search by
-  value: unknown; // Value to match
+type Where<T> = {
+  field: T;
+  value: unknown;
 };
 
 class WriteToDB {
@@ -141,7 +141,7 @@ class WriteToDB {
     }
   }
 
-  findOne(query: Where) {
+  findOne<T>(query: Where<T>) {
     const data = this.get();
     const filteredData = data.find(
       (item: any) => item[query.field] === query.value
