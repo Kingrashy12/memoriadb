@@ -1,4 +1,10 @@
-import { Data, ModelClass, ModelInterface, ModelSchema } from "./types";
+import {
+  Data,
+  FindOptions,
+  ModelClass,
+  ModelInterface,
+  ModelSchema,
+} from "./types";
 import WriteToDB from "./write_to_db";
 
 /**
@@ -111,8 +117,8 @@ function Schema<T extends Record<string, any>>(definition: ModelSchema<T>) {
       return Model.writeTodbInstance;
     }
 
-    static async find(): Promise<T[]> {
-      return this.getWriteToDB().get();
+    static async find(options?: FindOptions<T>): Promise<T[]> {
+      return this.getWriteToDB().get(options);
     }
 
     static async findById(id: string): Promise<T> {

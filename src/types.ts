@@ -65,9 +65,14 @@ export interface ModelInterface<T extends Record<string, any>> {
   deleteById(id: string): Promise<boolean>;
 }
 
+export type FindOptions<T> = {
+  $and?: Partial<T>[];
+  $where?: Partial<T>;
+};
+
 export type ModelClass<T> = {
   new (data: Partial<T>): T;
-  find(): Promise<T[]>;
+  find(options?: FindOptions<T>): Promise<T[]>;
   findById(id: string): Promise<T>;
   findOne(params: { field: keyof T; value: string }): Promise<T>;
   updateById(id: string, updateData: Partial<T>): Promise<T>;

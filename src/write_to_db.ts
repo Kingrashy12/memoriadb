@@ -1,5 +1,6 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
 import path from "path";
+import { FindOptions } from "./types";
 
 const genId = () => {
   const nums = "1234567890";
@@ -88,10 +89,27 @@ class WriteToDB {
     }
   }
 
-  get() {
+  get<T>(options?: FindOptions<T>) {
     try {
       const data = readFileSync(this.dir, "utf-8");
-      return JSON.parse(data); // Return the parsed JSON data
+      const parsed_data = JSON.parse(data);
+      if (!options) return parsed_data;
+
+      return parsed_data.filter((item) => {
+        const matchesQuery = Object.entries(options.$where).every(
+          ([key, value]) => key !== "$and" && item[key] === value
+        );
+
+        const matchesAnd = options.$and
+          ? options.$and.every((condition) =>
+              Object.entries(condition).every(
+                ([key, value]) => item[key] === value
+              )
+            )
+          : true;
+
+        return matchesQuery && matchesAnd;
+      });
     } catch (error) {
       throw new Error(
         `Error reading data from ${this.name} collection: ${error}`
